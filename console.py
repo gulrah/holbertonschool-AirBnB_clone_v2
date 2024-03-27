@@ -112,6 +112,27 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
+    
+    def _create_dict_instance(self, line):
+        """ Creates a dictionary from the input line"""
+        new_dict = {}
+        for item in line:
+            if "=" in item:
+                new_arg = item.split("=", 1)
+                key = new_arg[0]
+                value = new_arg[1]
+                if value[0] == '"' == value[-1]:
+                    value = value.replace('"', "").replace("_", " ")
+                else:
+                    try:
+                        value = int(value)
+                    except Exception:
+                        try:
+                            value = float(value)
+                        except Exception:
+                            continue
+                new_dict[key] = value
+        return new_dict
 
     def do_create(self, args):
         """ Create an object of any class with given parameters"""
