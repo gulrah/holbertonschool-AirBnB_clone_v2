@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Start a Flask web app"""
-from flask import Flask
+from flask import Flask, escape
 
 app = Flask(__name__)
 
@@ -15,6 +15,12 @@ def hello_hbnb():
 def display_hbnb():
     """Route displays 'HBNB'"""
     return "HBNB"
+
+
+@app.route('/c/<text>', strict_slashes=False)
+def display_text(text):
+    """Route displays 'C ' followed by the value of the text variable"""
+    return "C {}".format(escape(text).replace('_', ' '))
 
 
 if __name__ == "__main__":
