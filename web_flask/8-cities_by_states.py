@@ -1,30 +1,31 @@
 #!/usr/bin/python3
-"""Script that starts a Flask web application"""
+"""
+Start a Flask web app
+"""
 
 from flask import Flask, render_template
 from models import storage
-from models.state import State
-from models.city import City
-from os import getenv
 
 app = Flask(__name__)
 
 
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_by_states():
-    """Display a HTML page with states and their cities"""
-    states = storage.all(State).values()
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
-        states = sorted(states, key=lambda state: state.name)
-    else:
-        states = sorted(states, key=lambda state: state.name.lower())
-        
-        return render_template('8-cities_by_states.html', states=states)
-                            
-    
+    """
+    Route to display cities grouped by states
+    """
+    obj = storage.all('State')
+    states_list = []
+    for k, v in obj.items():
+        states_list.append(v)
+    return render_template('8-cities_by_states.html', states_list=states_list)
+
+
 @app.teardown_appcontext
-def teardown_db(exception):
-    """Remove the current SQLAlchemy session"""
+def teardown(exception):
+    """
+    Remove the current SQLAlchemy Session
+    """
     storage.close()
 
 
