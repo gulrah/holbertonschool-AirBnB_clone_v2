@@ -1,19 +1,13 @@
 #!/usr/bin/python3
-"""
-Start a Flask web app
-"""
-
+''' Script that starts a Flask web application '''
 from flask import Flask, render_template
 from models import storage
-
 app = Flask(__name__)
 
 
 @app.route('/cities_by_states', strict_slashes=False)
-def cities_by_states():
-    """
-    Route to display cities grouped by states
-    """
+def show_cities_by_states():
+    ''' Returns an HTML page showing states and its cities '''
     obj = storage.all('State')
     states_list = []
     for k, v in obj.items():
@@ -22,12 +16,10 @@ def cities_by_states():
 
 
 @app.teardown_appcontext
-def teardown(exception):
-    """
-    Remove the current SQLAlchemy Session
-    """
+def remove_session(exception):
+    ''' Closes the current storage session '''
     storage.close()
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port='5000')
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
