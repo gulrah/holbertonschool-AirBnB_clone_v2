@@ -32,4 +32,5 @@ class State(BaseModel, Base):
         """Getter method to return the list of City objects"""
         if getenv('HBNB_TYPE_STORAGE') == 'fs':
             from models import storage
-            return [city for city in storage.all(City).values() if city.state_id == self.id]
+            return [city for city in storage.all(City).values()
+                    if city.state_id == self.id]
