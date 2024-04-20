@@ -19,6 +19,8 @@
 	  {% for city in cities %}
 	  <li>{{ city.id }}: <b>{{ city.name }}</b></li>
 	  {% endfor %}
+	  {% else %}
+	  <li>No cities found</li>
 	  {% endif %}
 	</ul>
       </li>
