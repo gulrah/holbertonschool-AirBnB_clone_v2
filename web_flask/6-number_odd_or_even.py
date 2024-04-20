@@ -2,6 +2,7 @@
 """
 Start a Flask web app
 """
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -61,7 +62,7 @@ def number_odd_or_even(n):
     """
     Route displays an HTML page only if n is an integer
     """
-    odd_or_even = 'even' if n % 2 == 0 else 'odd'
+    odd_or_even = 'odd' if n % 2 != 0 else 'even'
     return render_template('6-number_odd_or_even.html', n=n, odd_or_even=odd_or_even)
 
 
