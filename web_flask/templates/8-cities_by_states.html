@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HBNB</title>
+  </head>
+  <body>
+    <h1>States</h1>
+    <ul>
+      {% for state in states %}
+      <li>{{ state.id }}: <b>{{ state.name }}</b>
+	<ul>
+	  {% set cities = state.cities %}
+	  {% if cities %}
+	  {% if getenv('HBNB_TYPE_STORAGE') == 'db' %}
+	  {% set cities = cities | sort(attribute='name') %}
+	  {% else %}
+	  {% set cities = cities | sort %}
+	  {% endif %}
+	  {% for city in cities %}
+	  <li>{{ city.id }}: <b>{{ city.name }}</b></li>
+	  {% endfor %}
+	  {% endif %}
+	</ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
