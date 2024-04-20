@@ -25,3 +25,10 @@ class State(BaseModel, Base):
         storage = FileStorage()
         return [city for city in storage.all(City).values()
                 if city.state_id == self.id]
+
+    @property
+    def cities(self):
+        """Getter method to return the list of City objects linked to the current State"""
+        if getenv('HBNB_TYPE_STORAGE') == 'db':
+            from models import storage
+            return [city for city in storage.all(City).values() if city.state_id == self.id]
