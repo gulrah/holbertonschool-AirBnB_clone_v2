@@ -64,11 +64,15 @@ def number_odd_or_even(n):
     """
     if isinstance(n, int):
         odd_or_even = 'odd' if n % 2 != 0 else 'even'
-        return render_template('6-number_odd_or_even.html', n=n, odd_or_even=odd_or_even)
+        return render_template(
+            '6-number_odd_or_even.html',
+            n=n,
+            odd_or_even=odd_or_even
+        )
     else:
         return "Not found", 404
-    
-    
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     """
