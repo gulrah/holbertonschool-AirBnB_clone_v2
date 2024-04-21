@@ -9,28 +9,25 @@ app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False)
-def states_list():
+def states():
     """Display a HTML page with a list of all State objects"""
-    states = storage.all(State).values()
+    states = sorted(storage.all(State).values(), key=lambda x: x.name)
     return render_template('9-states.html', states=states)
 
 
-@app.route('/states/<id>', strict_slashes=False)
-def state_cities(id):
+@app.route('/states/<state_id>', strict_slashes=False)
+def cities_by_state(state_id):
     """Display a HTML page with a list of City objects
-    linked to the specified State"""
-    state = storage.get(State, id)
-    if state:
-        return render_template('9-states.html', state=state)
-    else:
-        return render_template('9-states.html', not_found=True)
-    
-    
+    linked to the State specified by state_id"""
+    state = storage.get(State, state_id)
+    return render_template('9-states.html', state=state)
+
+
 @app.teardown_appcontext
 def teardown(exception):
     """Remove the current SQLAlchemy Session"""
     storage.close()
     
-    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
