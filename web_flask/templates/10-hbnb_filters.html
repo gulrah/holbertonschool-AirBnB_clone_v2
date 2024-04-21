@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}" type="text/css">
+    <title>HBNB Filters</title>
+  </head>
+  <body>
+    <header class="header">
+      <a href="index.html"><img class="logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="AirBnB Logo"></a>
+      <h1 class="title">AirBnB Clone</h1>
+      <nav>
+	<ul class="nav-links">
+	  <li><a href="#">Places</a></li>
+	  <li><a href="#">Sign Up</a></li>
+	  <li><a href="#">Log In</a></li>
+	</ul>
+      </nav>
+    </header>
+
+    <section class="filters">
+      <article class="filters-header">
+	<h2 class="title">Filters</h2>
+      </article>
+
+      <article class="filters-section">
+	<div class="locations">
+	  <h3 class="title">States</h3>
+	  <div class="popover">
+	    {% for state in states %}
+	    <div class="checkbox">
+	      <label>
+		<input type="checkbox" name="states" value="{{ state.id }}"> {{ state.name }}
+	      </label>
+	    </div>
+	    {% endfor %}
+	  </div>
+	</div>
+
+	<div class="locations">
+	  <h3 class="title">Cities</h3>
+	  <div class="popover">
+	    {% for city in cities %}
+	    <div class="checkbox">
+	      <label>
+		<input type="checkbox" name="cities" value="{{ city.id }}"> {{ city.name }}
+	      </label>
+	    </div>
+	    {% endfor %}
+	  </div>
+	</div>
+
+	<div class="amenities">
+	  <h3 class="title">Amenities</h3>
+	  <div class="popover">
+	    {% for amenity in amenities %}
+	    <div class="checkbox">
+	      <label>
+		<input type="checkbox" name="amenities" value="{{ amenity.id }}"> {{ amenity.name }}
+	      </label>
+	    </div>
+	    {% endfor %}
+	  </div>
+	</div>
+      </article>
+
+      <article class="apply-filters">
+	<button>Apply</button>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2024 AirBnB Clone. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

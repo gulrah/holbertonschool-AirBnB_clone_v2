@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}" type="text/css">
+    <title>HBNB</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <a href="index.html"><img class="logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="AirBnB Logo"></a>
+      <h1 class="title">AirBnB Clone</h1>
+      <nav>
+	<ul class="nav-links">
+	  <li><a href="#">Places</a></li>
+	  <li><a href="#">Sign Up</a></li>
+	  <li><a href="#">Log In</a></li>
+	</ul>
+      </nav>
+    </header>
+
+    <!-- Filters -->
+    <section class="filters">
+      <!-- Filters content -->
+    </section>
+
+    <!-- Places -->
+    <section class="places">
+      {% for place in places %}
+      <article class="place-card">
+	<div class="place-image">
+	  <img src="{{ place.url }}" alt="{{ place.name }}">
+	</div>
+	<div class="place-info">
+	  <div class="place-name">{{ place.name }}</div>
+	  <div class="place-price">{{ place.price_by_night }}</div>
+	</div>
+      </article>
+      {% endfor %}
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 AirBnB Clone. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
